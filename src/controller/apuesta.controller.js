@@ -29,7 +29,6 @@ export const postApuesta = async (req, res) =>{
     try {
         const info = req.body;
         
-        // Si es un array, procesar múltiples apuestas
         if (Array.isArray(info)) {
             const apuestas = info.map(apuesta => ({
                 ...apuesta,
@@ -40,13 +39,12 @@ export const postApuesta = async (req, res) =>{
             return res.json({msg: "post apuestas (múltiples)", result});
         }
         
-        // Si es un objeto único, procesar una sola apuesta
         info.usuario = new ObjectId(info.usuario);
         info.evento = new ObjectId(info.evento);
         const result = await postApuestaModel(info);
         res.json({msg: "post apuesta", result});
     } catch (error) {
-        res.status(400).json({msg: "Error al procesar apuesta(s)", error: error.message});
+        res.status(400).json({msg: "Error al procesar apuesta", error: error.message});
     }
 } 
 
