@@ -96,7 +96,38 @@ export const eventoUpdate = checkSchema({
     }
 }, ["body"]);
 
+export const eventoActualizarCuota = checkSchema({
+    id: {
+        notEmpty: {
+            errorMessage: "El ID del evento es requerido"
+        },
+        isMongoId: {
+            errorMessage: "El ID debe ser un MongoDB ObjectId válido"
+        }
+    },
+    cuota_visitante: {
+        notEmpty: {
+            errorMessage: "La cuota visitante es requerida"
+        },
+        isFloat: {
+            options: { min: 1.0, max: 999.99 },
+            errorMessage: "La cuota visitante debe ser un número entre 1.0 y 999.99"
+        },
+        custom: {
+            options: (value) => {
+                const numValue = parseFloat(value);
+                if (isNaN(numValue)) {
+                    throw new Error("La cuota visitante debe ser un número válido");
+                }
+                return true;
+            }
+        },
+        toFloat: true
+    }
+}, ["body"]);
+
 export default {
     eventoPost,
-    eventoUpdate
+    eventoUpdate,
+    eventoActualizarCuota
 };

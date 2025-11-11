@@ -1,10 +1,15 @@
-import { postApuestaModel, postApuestaManyModel, getApuestaModel, getApuestasEnCursoModel, updateApuestaEstadoModel, getTotalApostadoPorUsuarioModel, getUsuariosMayorGananciaModel, getApuestasCompletasModel } from "../model/apuesta.model.js"
+import { postApuestaModel, postApuestaManyModel, getApuestaModel, getApuestasEnCursoModel, updateApuestaEstadoModel, getTotalApostadoPorUsuarioModel, getUsuariosMayorGananciaModel, getApuestasCompletasModel, getPromedioCuotasPorDeporteModel } from "../model/apuesta.model.js"
 import { ObjectId } from "mongodb";
+import { validationResult } from "express-validator";
 
 export const getApuesta = async (req, res)=> {
-    const { estado, total_apostado, mayor_ganancia, completa } = req.query;
+    const { estado, total_apostado, mayor_ganancia, completa, promedio_cuotas } = req.query;
     if (completa) {
         const result = await getApuestasCompletasModel();
+        return res.json({data: result});
+    }
+    if (promedio_cuotas) {
+        const result = await getPromedioCuotasPorDeporteModel();
         return res.json({data: result});
     }
     if (total_apostado) {
@@ -20,6 +25,14 @@ export const getApuesta = async (req, res)=> {
 }
 
 export const putApuesta = async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(400).json({
+            msg: "Error en la validación",
+            errors: errors.array()
+        });
+    }
+    
     const { id, estado } = req.body;
     const result = await updateApuestaEstadoModel(id, estado);
     res.json({msg: "Estado de apuesta actualizado", result});

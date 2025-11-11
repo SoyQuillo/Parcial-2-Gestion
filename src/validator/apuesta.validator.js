@@ -81,7 +81,30 @@ export const apuestaUpdate = checkSchema({
     }
 }, ["body"]);
 
+export const apuestaActualizarEstado = checkSchema({
+    id: {
+        notEmpty: {
+            errorMessage: "El ID de la apuesta es requerido"
+        },
+        isMongoId: {
+            errorMessage: "El ID debe ser un MongoDB ObjectId válido"
+        }
+    },
+    estado: {
+        notEmpty: {
+            errorMessage: "El estado es requerido"
+        },
+        isIn: {
+            options: [['ganada', 'perdida']],
+            errorMessage: "El estado debe ser 'ganada' o 'perdida'"
+        },
+        trim: true,
+        toLowerCase: true
+    }
+}, ["body"]);
+
 export default {
     apuestaPost,
-    apuestaUpdate
+    apuestaUpdate,
+    apuestaActualizarEstado
 };

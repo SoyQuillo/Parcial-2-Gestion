@@ -2,31 +2,31 @@
   "usuarios": [
     {
       "nombre": "Carlos Rodríguez",
-      "correo": "carlos.rodriguez@email.com",
-      "saldo": 5000.00,
+      "correo": "carlos.rodriguez@example.com",
+      "saldo": 5000.0,
       "pais": "Colombia"
     },
     {
       "nombre": "María González",
-      "correo": "maria.gonzalez@email.com",
-      "saldo": 3500.50,
+      "correo": "maria.gonzalez@example.com",
+      "saldo": 3500.5,
       "pais": "México"
     },
     {
       "nombre": "Juan Pérez",
-      "correo": "juan.perez@email.com",
+      "correo": "juan.perez@example.com",
       "saldo": 7200.75,
       "pais": "Argentina"
     },
     {
       "nombre": "Ana Martínez",
-      "correo": "ana.martinez@email.com",
-      "saldo": 2800.00,
+      "correo": "ana.martinez@example.com",
+      "saldo": 2800.0,
       "pais": "España"
     },
     {
       "nombre": "Luis Fernández",
-      "correo": "luis.fernandez@email.com",
+      "correo": "luis.fernandez@example.com",
       "saldo": 4500.25,
       "pais": "Chile"
     }
@@ -34,16 +34,16 @@
   "eventos": [
     {
       "deporte": "Fútbol",
-      "fecha": "2024-11-15T20:00:00Z",
+      "fecha": "2024-11-01T20:00:00Z",
       "equipo_local": "Real Madrid",
       "equipo_visitante": "Barcelona",
-      "cuota_local": 2.10,
-      "cuota_empate": 3.20,
-      "cuota_visitante": 3.50
+      "cuota_local": 2.1,
+      "cuota_empate": 3.2,
+      "cuota_visitante": 3.5
     },
     {
       "deporte": "Baloncesto",
-      "fecha": "2024-11-16T19:30:00Z",
+      "fecha": "2024-11-02T19:30:00Z",
       "equipo_local": "Lakers",
       "equipo_visitante": "Warriors",
       "cuota_local": 1.85,
@@ -52,104 +52,77 @@
     },
     {
       "deporte": "Tenis",
-      "fecha": "2024-11-17T15:00:00Z",
+      "fecha": "2024-11-03T15:00:00Z",
       "jugador1": "Rafael Nadal",
       "jugador2": "Novak Djokovic",
-      "cuota_local": 2.30,
+      "cuota_local": 2.3,
       "cuota_empate": null,
       "cuota_visitante": 1.65
     },
     {
       "deporte": "Fútbol",
-      "fecha": "2024-11-18T18:00:00Z",
+      "fecha": "2024-11-04T18:00:00Z",
       "equipo_local": "Manchester United",
       "equipo_visitante": "Liverpool",
       "cuota_local": 2.75,
-      "cuota_empate": 3.10,
-      "cuota_visitante": 2.60
+      "cuota_empate": 3.1,
+      "cuota_visitante": 2.6
     },
     {
       "deporte": "Béisbol",
-      "fecha": "2024-11-19T21:00:00Z",
+      "fecha": "2024-11-05T21:00:00Z",
       "equipo_local": "Yankees",
       "equipo_visitante": "Red Sox",
       "cuota_local": 1.95,
       "cuota_empate": null,
-      "cuota_visitante": 1.90
+      "cuota_visitante": 1.9
     }
   ],
   "apuestas": [
     {
-      "usuario": "690fb74c0de5a3dd925228f8",
-      "evento": "690fb7f0e679e6b2e8fa8c33",
-      "monto_apostado": 100.00,
-      "tipo_apuesta": "local",
-      "cuota_aplicada": 2.10,
-      "posible_ganancia": 210.00,
-      "estado": "en curso"
-    },
-    {
-      "usuario": "690fb74c0de5a3dd925228f9",
-      "evento": "690fb7f0e679e6b2e8fa8c33",
-      "monto_apostado": 250.00,
-      "tipo_apuesta": "visitante",
-      "cuota_aplicada": 3.50,
-      "posible_ganancia": 875.00,
-      "estado": "en curso"
-    },
-    {
-      "usuario": "690fb74c0de5a3dd925228fa",
-      "evento": "690fb7f0e679e6b2e8fa8c34",
-      "monto_apostado": 500.00,
-      "tipo_apuesta": "local",
-      "cuota_aplicada": 1.85,
-      "posible_ganancia": 925.00,
-      "estado": "ganada"
-    },
-    {
-      "usuario": "690fb74c0de5a3dd925228f8",
-      "evento": "690fb7f0e679e6b2e8fa8c35",
-      "monto_apostado": 150.00,
-      "tipo_apuesta": "visitante",
-      "cuota_aplicada": 1.65,
-      "posible_ganancia": 247.50,
-      "estado": "perdida"
-    },
-    {
       "usuario": "690fb74c0de5a3dd925228fb",
       "evento": "690fb7f0e679e6b2e8fa8c36",
-      "monto_apostado": 300.00,
+      "monto_apostado": 300.0,
       "tipo_apuesta": "empate",
-      "cuota_aplicada": 3.10,
-      "posible_ganancia": 930.00,
+      "cuota_aplicada": 3.1,
+      "posible_ganancia": 930.0,
       "estado": "en curso"
-    },
-    {
-      "usuario": "690fb74c0de5a3dd925228f9",
-      "evento": "690fb7f0e679e6b2e8fa8c37",
-      "monto_apostado": 200.00,
-      "tipo_apuesta": "local",
-      "cuota_aplicada": 1.95,
-      "posible_ganancia": 390.00,
-      "estado": "ganada"
-    },
-    {
-      "usuario": "690fb74c0de5a3dd925228fa",
-      "evento": "690fb7f0e679e6b2e8fa8c34",
-      "monto_apostado": 400.00,
-      "tipo_apuesta": "visitante",
-      "cuota_aplicada": 2.05,
-      "posible_ganancia": 820.00,
-      "estado": "perdida"
     },
     {
       "usuario": "690fb74c0de5a3dd925228fb",
       "evento": "690fb7f0e679e6b2e8fa8c36",
-      "monto_apostado": 175.00,
+      "monto_apostado": 175.0,
       "tipo_apuesta": "local",
       "cuota_aplicada": 2.75,
       "posible_ganancia": 481.25,
       "estado": "en curso"
+    },
+    {
+      "usuario": "690fb74c0de5a3dd925228f8",
+      "evento": "690fb7f0e679e6b2e8fa8c33",
+      "monto_apostado": 100.0,
+      "tipo_apuesta": "local",
+      "cuota_aplicada": 2.1,
+      "posible_ganancia": 210.0,
+      "estado": "en curso"
+    },
+    {
+      "usuario": "690fb74c0de5a3dd925228f9",
+      "evento": "690fb7f0e679e6b2e8fa8c33",
+      "monto_apostado": 250.0,
+      "tipo_apuesta": "visitante",
+      "cuota_aplicada": 3.5,
+      "posible_ganancia": 875.0,
+      "estado": "ganada"
+    },
+    {
+      "usuario": "690fb74c0de5a3dd925228fc",
+      "evento": "690fb7f0e679e6b2e8fa8c34",
+      "monto_apostado": 500.0,
+      "tipo_apuesta": "local",
+      "cuota_aplicada": 1.85,
+      "posible_ganancia": 925.0,
+      "estado": "ganada"
     }
   ]
 }

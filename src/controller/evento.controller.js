@@ -1,5 +1,6 @@
 import { getEventoModel, postEventoManyModel, postEventoModel, updateEventoCuotaVisitanteModel, deleteEventoFinalizadoModel } from "../model/evento.model.js";
 import { getEventoByDeporteModel, getEventosCuotaLocalModel, getPromedioCuotasPorDeporteModel } from "../model/apuesta.model.js";
+import { validationResult } from "express-validator";
 
 export const getEvento = async (req, res)=> {
     const { deporte, cuota_local, promedio_cuotas } = req.query;
@@ -16,6 +17,14 @@ export const getEvento = async (req, res)=> {
 }
 
 export const putEvento = async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(400).json({
+            msg: "Error en la validación",
+            errors: errors.array()
+        });
+    }
+    
     const { id, cuota_visitante } = req.body;
     const result = await updateEventoCuotaVisitanteModel(id, parseFloat(cuota_visitante));
     res.json({msg: "Cuota visitante actualizada", result});

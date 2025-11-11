@@ -42,7 +42,6 @@ route.get("/filter", async (req, res ) => {
 })
 
 route.get("/filters", async (req,res) => {
-    // { name : value }
     let data = req.query;
     if(data.length === 0){ return res.send([])}
     if(typeof data.year !== "undefined"){

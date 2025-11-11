@@ -1,5 +1,6 @@
 import { getUsuarioModel , postUsuarioModel, postUsuarioManyModel, updateUsuarioSaldoModel, deleteUsuarioModel } from "../model/usuario.model.js";
 import { getUsuarioBySaldoModel, getUsuariosBaloncestoModel } from "../model/apuesta.model.js";
+import { validationResult } from "express-validator";
 
 export const getUsuario = async (req, res)=> {
     const { saldo, baloncesto } = req.query;
@@ -12,12 +13,28 @@ export const getUsuario = async (req, res)=> {
 }
 
 export const putUsuario = async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(400).json({
+            msg: "Error en la validación",
+            errors: errors.array()
+        });
+    }
+    
     const { id, ganancia } = req.body;
     const result = await updateUsuarioSaldoModel(id, parseFloat(ganancia));
     res.json({msg: "Saldo actualizado", result});
 }
 
 export const deleteUsuario = async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(400).json({
+            msg: "Error en la validación",
+            errors: errors.array()
+        });
+    }
+    
     const { id, eliminarApuestas } = req.body;
     const result = await deleteUsuarioModel(id, eliminarApuestas || false);
     res.json({msg: "Usuario eliminado", result});

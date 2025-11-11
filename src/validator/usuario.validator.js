@@ -65,7 +65,59 @@ export const usuarioUpdate = checkSchema({
     }
 }, ["body"]);
 
+export const usuarioActualizarSaldo = checkSchema({
+    id: {
+        notEmpty: {
+            errorMessage: "El ID del usuario es requerido"
+        },
+        isMongoId: {
+            errorMessage: "El ID debe ser un MongoDB ObjectId válido"
+        }
+    },
+    ganancia: {
+        notEmpty: {
+            errorMessage: "La ganancia es requerida"
+        },
+        isFloat: {
+            errorMessage: "La ganancia debe ser un número válido"
+        },
+        custom: {
+            options: (value) => {
+                const numValue = parseFloat(value);
+                if (isNaN(numValue)) {
+                    throw new Error("La ganancia debe ser un número válido");
+                }
+                if (numValue < -9999999999 || numValue > 9999999999) {
+                    throw new Error("La ganancia debe estar entre -9,999,999,999 y 9,999,999,999");
+                }
+                return true;
+            }
+        }
+    }
+}, ["body"]);
+
+export const usuarioEliminar = checkSchema({
+    id: {
+        notEmpty: {
+            errorMessage: "El ID del usuario es requerido"
+        },
+        isMongoId: {
+            errorMessage: "El ID debe ser un MongoDB ObjectId válido"
+        }
+    },
+    eliminarApuestas: {
+        optional: true,
+        isBoolean: {
+            strict: true,
+            errorMessage: "eliminarApuestas debe ser true o false"
+        },
+        toBoolean: true
+    }
+}, ["body"]);
+
 export default {
     usuarioPost,
-    usuarioUpdate
+    usuarioUpdate,
+    usuarioActualizarSaldo,
+    usuarioEliminar
 };
