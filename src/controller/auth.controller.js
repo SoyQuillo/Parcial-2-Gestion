@@ -18,7 +18,7 @@ export const login = async (req, res) => {
         if (!username || !password) {
             return res.status(400).json({
                 success: false,
-                msg: "Usuario y contraseña son requeridos"
+                msg: "Por favor proporcione tanto el nombre de usuario como la contraseña para continuar"
             });
         }
 
@@ -28,7 +28,7 @@ export const login = async (req, res) => {
         if (!usuario) {
             return res.status(401).json({
                 success: false,
-                msg: "Credenciales inválidas"
+                msg: "No se encontró una cuenta asociada a este nombre de usuario"
             });
         }
 
@@ -38,7 +38,7 @@ export const login = async (req, res) => {
         if (!isPasswordValid) {
             return res.status(401).json({
                 success: false,
-                msg: "Credenciales inválidas"
+                msg: "La contraseña proporcionada no es correcta"
             });
         }
 
@@ -48,25 +48,17 @@ export const login = async (req, res) => {
         // Almacenar OTP en Redis con expiración de 5 minutos
         await saveOTP(username, otp);
 
-        // Enviar OTP al correo del usuario
-        const emailSubject = "Código de verificación OTP";
-        const emailMessage = `
-            <h1>Código de verificación</h1>
-            <p>Tu código OTP es: <strong>${otp}</strong></p>
-            <p>Este código expira en 5 minutos.</p>
-        `;
+        // Mostrar OTP en consola para desarrollo
+        console.log(`\n========================================`);
+        console.log(`🔐 OTP GENERADA PARA: ${username}`);
+        console.log(`📝 CÓDIGO: ${otp}`);
+        console.log(`⏱️  EXPIRA EN: 5 minutos`);
+        console.log(`========================================\n`);
 
-        try {
-            await sendMail(usuario.correo, emailSubject, emailMessage);
-        } catch (emailError) {
-            console.error("Error enviando correo:", emailError);
-            // Continuar aunque falle el envío de correo (para desarrollo)
-        }
-
-        // Responder confirmando que la OTP fue enviada
+        // Responder confirmando que la OTP fue generada
         return res.status(200).json({
             success: true,
-            msg: "OTP enviada al correo electrónico",
+            msg: "Se ha generado un código de verificación. Revisa la consola del servidor para obtenerlo.",
             // No se entrega el token aún
         });
 
@@ -74,7 +66,7 @@ export const login = async (req, res) => {
         console.error("Error en login:", error);
         return res.status(500).json({
             success: false,
-            msg: "Error interno del servidor"
+            msg: "Hemos experimentado un problema inesperado. Nuestro equipo ha sido notificado."
         });
     }
 };
@@ -88,7 +80,7 @@ export const verifyOTP = async (req, res) => {
         if (!username || !otp) {
             return res.status(400).json({
                 success: false,
-                msg: "Usuario y OTP son requeridos"
+                msg: "Se requieren tanto el nombre de usuario como el código de verificación para continuar"
             });
         }
 
@@ -98,7 +90,7 @@ export const verifyOTP = async (req, res) => {
         if (!otpData) {
             return res.status(401).json({
                 success: false,
-                msg: "OTP no encontrada o expirada"
+                msg: "El código de verificación no es válido o ha expirado. Por favor solicita uno nuevo"
             });
         }
 
@@ -106,7 +98,7 @@ export const verifyOTP = async (req, res) => {
         if (otpData.otp !== otp) {
             return res.status(401).json({
                 success: false,
-                msg: "OTP incorrecta"
+                msg: "El código de verificación ingresado no es correcto. Por favor inténtalo de nuevo"
             });
         }
 
@@ -119,7 +111,7 @@ export const verifyOTP = async (req, res) => {
         if (!usuario) {
             return res.status(401).json({
                 success: false,
-                msg: "Usuario no encontrado"
+                msg: "No se encontró ninguna cuenta asociada a estas credenciales"
             });
         }
 
@@ -143,14 +135,14 @@ export const verifyOTP = async (req, res) => {
                 correo: usuario.correo,
                 nombre: usuario.nombre
             },
-            msg: "Autenticación exitosa"
+            msg: "¡Inicio de sesión exitoso! Bienvenido de nuevo"
         });
 
     } catch (error) {
         console.error("Error en verify-otp:", error);
         return res.status(500).json({
             success: false,
-            msg: "Error interno del servidor"
+            msg: "Hemos experimentado un problema inesperado. Nuestro equipo ha sido notificado."
         });
     }
 };

@@ -1,14 +1,8 @@
 import { getUsuarioModel , postUsuarioModel, postUsuarioManyModel, updateUsuarioSaldoModel, deleteUsuarioModel } from "../model/usuario.model.js";
-import { getUsuarioBySaldoModel, getUsuariosBaloncestoModel } from "../model/apuesta.model.js";
 import { validationResult } from "express-validator";
 
 export const getUsuario = async (req, res)=> {
-    const { saldo, baloncesto } = req.query;
-    if (baloncesto) {
-        const result = await getUsuariosBaloncestoModel();
-        return res.json({data: result});
-    }
-    const result = saldo ? await getUsuarioBySaldoModel(parseFloat(saldo)) : await getUsuarioModel();
+    const result = await getUsuarioModel();
     res.json({data: result})
 }
 
