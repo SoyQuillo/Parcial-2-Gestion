@@ -36,3 +36,15 @@ export const deleteUsuarioModel = async (usuarioId, eliminarApuestas = false) =>
     const result = await conn.collection("usuario").deleteOne({ _id: new ObjectId(usuarioId) });
     return result;
 }
+
+// Buscar usuario por username o correo
+export const findUsuarioByUsernameOrEmail = async (usernameOrEmail) => {
+    const conn = await connection();
+    const result = await conn.collection("usuario").findOne({
+        $or: [
+            { username: usernameOrEmail },
+            { correo: usernameOrEmail }
+        ]
+    });
+    return result;
+}
